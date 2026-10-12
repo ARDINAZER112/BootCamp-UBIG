@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gap-fluid: clamp(1rem, 1vw, 2rem);
+    --padding-fluid: clamp(1.5rem, 3vw, 3rem);
+}
+
+body {
+    padding: var(--padding-fluid);
+    font-family: sans-serif;
+}
+
+.bento-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-fluid);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bento-item {
+    background-color: white;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sekat-nasi {
+    grid-column: span 2;
+    min-height: clamp(200px, 25vw, 320px);
+}
+
+.sekat-iwak {
+    grid-row: span 2;
+    min-height: clamp(420px, 52vw, 660px);
+}
+
+.sekat-buah, .sekat-bumbu {
+    min-height: clamp(180px, 22vw, 280px)
+}
