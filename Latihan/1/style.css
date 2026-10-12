@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Biar kalau tambah padding, kotak nggak makin lebar */
+}
+
+:root {
+    /* clamp(paling kecil, ukuran ideal, paling besar) */
+    --gap-fluid: clamp(1rem, 2vw, 2rem);
+    --padding-fluid: clamp(1.5rem, 3vw, 3rem);
+}
+
+body {
+    padding: var(--padding-fluid); /* Jarak dari pinggir layar */
+    font-family: sans-serif;
+}
+
+.bento-container {
+    display: grid;
+    /* Kita bagi jadi 3 kolom yang lebarnya sama (1fr) */
+    grid-template-columns: repeat(3, 1fr); 
+    
+    /* Gunakan variabel gap yang sudah kita buat tadi */
+    gap: var(--gap-fluid); 
+    
+    max-width: 1200px;
+    margin: 0 auto; /* Supaya rak bento-nya ada di tengah layar */
+}
+
+/* Kasih warna dasar dulu biar kelihatan kotaknya */
+.bento-item {
+    background-color: white;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sekat-gohan {
+    /* Dia memakan 2 kolom sekaligus */
+    grid-column: span 2;
+    /* Kita kasih tinggi minimum pakai clamp sesuai instruksi */
+    min-height: clamp(200px, 25vw, 320px);
+}
+
+.sekat-skewer {
+    /* Dia cuma 1 kolom, tapi memakan 2 baris ke bawah */
+    grid-row: span 2;
+    min-height: clamp(420px, 52vw, 660px);
+}
+
+.sekat-protein, .sekat-dessert {
+    /* Mereka standar: 1 kolom & 1 baris */
+    min-height: clamp(180px, 22vw, 280px);
+}
