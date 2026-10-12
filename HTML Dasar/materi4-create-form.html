@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Materi 3 - Form HTML</title>
+</head>
+<body>
+
+    <h2>Belajar Membuat Formulir (Form)</h2>
+    
+    <form>
+        <!-- 1. Input Teks Biasa -->
+        <label>Username:</label><br>
+        <input type="text" name="username"><br><br>
+
+        <!-- 2. Input Password (Teks tersembunyi) -->
+        <label>Password:</label><br>
+        <input type="password" name="password"><br><br>
+
+        <!-- 3. Radio Button (Hanya bisa pilih salah satu) -->
+        <label>Status Siswa:</label><br>
+        <input type="radio" name="status" value="aktif"> Aktif
+        <input type="radio" name="status" value="alumni"> Alumni<br><br>
+
+        <!-- 4. Checkbox (Bisa pilih banyak) -->
+        <label>Materi yang Dikuasai:</label><br>
+        <input type="checkbox" name="skill" value="html"> HTML
+        <input type="checkbox" name="skill" value="css"> CSS
+        <input type="checkbox" name="skill" value="js"> JavaScript<br><br>
+
+        <!-- 5. Dropdown List / Select -->
+        <label>Asal Provinsi:</label><br>
+        <select name="provinsi">
+            <option value="jatim">Jawa Timur</option>
+            <option value="jateng">Jawa Tengah</option>
+            <option value="jabar">Jawa Barat</option>
+        </select><br><br>
+
+        <!-- 6. Upload File -->
+        <label>Upload Ijazah/Sertifikat:</label><br>
+        <input type="file" name="dokumen"><br><br>
+
+        <!-- 7. Tombol Submit -->
+        <input type="button" value="Kirim Formulir">
+    </form>
+
+</body>
+</html>
