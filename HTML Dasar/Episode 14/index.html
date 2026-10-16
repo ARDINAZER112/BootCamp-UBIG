@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode 14: Belajar Membuat Form</title>
+</head>
+<body>
+
+    <h1>Pendaftaran Anggota Baru</h1>
+    <hr>
+
+    <!-- Tag <form> adalah pembungkus utama untuk semua elemen input -->
+    <form action="#" method="POST">
+        
+        <!-- 1. Input Text: Untuk teks biasa -->
+        <h2>Data Diri</h2>
+        <label for="fname">Nama Depan:</label><br>
+        <input type="text" id="fname" name="fname" placeholder="Masukkan nama depan"><br><br>
+
+        <label for="lname">Nama Belakang:</label><br>
+        <input type="text" id="lname" name="lname" placeholder="Masukkan nama belakang"><br><br>
+
+        <!-- 2. Input Password: Teks disembunyikan dengan sensor (titik-titik) -->
+        <label for="pwd">Kata Sandi (Password):</label><br>
+        <input type="password" id="pwd" name="pwd"><br><br>
+        <hr>
+
+        <!-- 3. Radio Button: Untuk memilih HANYA SATU opsi -->
+        <h2>Pilih jenis kelmain</h2>
+        <p>Pilih jenis kelamin</p>
+        <!-- Atribut 'name' harus sama agar opsi saling menggantikan -->
+        <input type="radio" id="jeniskelamin_lakilaki" name="jeniskelamin" value="lakilaki">
+        <label for="jeniskelamin_lakilaki">Laki Laki</label><br>
+        <input type="radio" id="jeniskelamin_perempuan" name="jeniskelamin" value="perempuan">
+        <label for="jeniskelamin_perempuan">Perempuan</label><br><br>
+        <hr>
+
+        <!-- 4. Checkbox: Untuk memilih LEBIH DARI SATU opsi -->
+        <h2>Minat & Hobi</h2>
+        <p>Pilih genre musik favorit Anda (boleh lebih dari satu):</p>
+        <input type="checkbox" id="dangdut" name="musik" value="dangdut">
+        <label for="dangdut">Dangdut</label><br>
+        <input type="checkbox" id="jazz" name="musik" value="jazz">
+        <label for="jazz">Jazz</label><br>
+        <input type="checkbox" id="pop" name="musik" value="pop">
+        <label for="pop">Pop</label><br><br>
+        <hr>
+
+        <!-- 5. Drop-down List: Pilihan menu menurun -->
+        <h2>Pekerjaan</h2>
+        <label for="pekerjaan">Pilih Pekerjaan Saat Ini:</label><br>
+        <select id="pekerjaan" name="pekerjaan">
+            <option value="pelajar">Pelajar</option>
+            <option value="mahasiswa">Mahasiswa</option>
+            <option value="wirausaha">Wirausaha</option>
+            <option value="pegawai">Karyawan Swasta</option>
+        </select><br><br>
+        <hr>
+
+        <!-- 6. Upload File: Untuk mengunggah dokumen/gambar -->
+        <h2>Dokumen Pendukung</h2>
+        <label for="foto">Upload Foto Profil:</label><br>
+        <input type="file" id="foto" name="foto"><br><br>
+        <hr>
+
+        <!-- 7. Tombol Submit: Untuk mengirimkan data ke server -->
+        <p><i>*Pastikan semua data sudah benar sebelum klik kirim.</i></p>
+        <input type="submit" value="Kirim Data Pendaftaran">
+
+    </form>
+
+</body>
+</html>

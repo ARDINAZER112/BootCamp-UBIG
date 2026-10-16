@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode 13: Belajar Membuat Tabel</title>
+</head>
+<body>
+
+    <h1>Belajar Membuat Tabel di HTML</h1>
+    <hr>
+
+    <!-- Tabel Sederhana Dasar -->
+    <h2>1. Tabel Sederhana (Menggunakan table, tr, th, td)</h2>
+    <!-- Atribut border="1" digunakan agar garis tepi tabel terlihat -->
+    <table border="1">
+        <!-- Baris Pertama: Header Tabel -->
+        <tr>
+            <th>Nomor</th>
+            <th>Judul Buku</th>
+            <th>Penulis</th>
+            <th>Status</th>
+        </tr>
+        <!-- Baris Kedua: Data -->
+        <tr>
+            <td>1</td>
+            <td>Bumi Manusia</td>
+            <td>Pramoedya Ananta Toer</td>
+            <td>Tersedia</td>
+        </tr>
+        <!-- Baris Ketiga: Data -->
+        <tr>
+            <td>2</td>
+            <td>Rectiverso</td>
+            <td>Dee Lestari</td>
+            <td>Dipinjam</td>
+        </tr>
+        <!-- Baris Keempat: Data -->
+        <tr>
+            <td>3</td>
+            <td>Metode Tafsir Al-Quran</td>
+            <td>M. Quraish Shihab</td>
+            <td>Tersedia</td>
+        </tr>
+    </table>
+    <br><hr>
+
+    <!-- Menggabungkan Kolom dengan colspan -->
+    <h2>2. Tabel dengan Penggabungan Kolom (Colspan)</h2>
+    <table border="1">
+        <tr>
+            <th colspan="2">Data Diri Pengguna</th>
+        </tr>
+        <tr>
+            <td>Nama:</td>
+            <td>Budi Santoso</td>
+        </tr>
+        <tr>
+            <td>Pekerjaan:</td>
+            <td>Mahasiswa</td>
+        </tr>
+    </table>
+    <br><hr>
+
+    <!-- Menggabungkan Baris dengan rowspan -->
+    <h2>3. Tabel dengan Penggabungan Baris (Rowspan)</h2>
+    <table border="1">
+        <tr>
+            <th>Kategori</th>
+            <th>Detail</th>
+        </tr>
+        <tr>
+            <td rowspan="2">Alamat:</td>
+            <td>Jl Gajah Mada, Gang Mekar II</td>
+        </tr>
+        <tr>
+            <td>Tuban, Jawa Timur</td>
+        </tr>
+        <tr>
+            <td>Telepon:</td>
+            <td>0852-3699-5741</td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan Membuat Formulir HTML</title>
+</head>
+<body>
+
+    <h1>Formulir Pendaftaran Akun</h1>
+    
+    <!-- Tag form dengan method POST (data disembunyikan saat dikirim) -->
+    <form action="proses.php" method="POST">
+        
+        <!-- Input Teks Biasa -->
+        <p>
+            <label for="nama_lengkap">Nama Lengkap:</label><br>
+            <input type="text" id="nama_lengkap" name="nama" placeholder="Masukkan nama Anda" required>
+        </p>
+
+        <!-- Input Email -->
+        <p>
+            <label for="email_user">Email:</label><br>
+            <!-- type="email" otomatis memvalidasi apakah format input sudah berupa email (@) -->
+            <input type="email" id="email_user" name="email" placeholder="contoh@email.com" required>
+        </p>
+
+        <!-- Input Password -->
+        <p>
+            <label for="kata_sandi">Kata Sandi:</label><br>
+            <!-- type="password" akan menyamarkan teks yang diketik menjadi titik/bintang -->
+            <input type="password" id="kata_sandi" name="password" required>
+        </p>
+
+        <!-- Input Radio (Hanya bisa pilih satu) -->
+        <p>
+            <label>Jenis Kelamin:</label><br>
+            <!-- Atribut 'name' harus sama agar browser tahu keduanya adalah satu kelompok pilihan -->
+            <input type="radio" id="pria" name="gender" value="pria">
+            <label for="pria">Pria</label>
+            
+            <input type="radio" id="wanita" name="gender" value="wanita">
+            <label for="wanita">Wanita</label>
+        </p>
+
+        <!-- Input Select / Dropdown -->
+        <p>
+            <label for="pekerjaan">Pekerjaan:</label><br>
+            <select id="pekerjaan" name="pekerjaan">
+                <option value="pelajar">Pelajar / Mahasiswa</option>
+                <option value="karyawan">Karyawan Swasta</option>
+                <option value="wirausaha">Wirausaha</option>
+                <option value="lainnya">Lainnya</option>
+            </select>
+        </p>
+
+        <!-- Input Textarea (Teks Panjang) -->
+        <p>
+            <label for="alamat">Alamat Lengkap:</label><br>
+            <textarea id="alamat" name="alamat" rows="4" cols="40" placeholder="Tuliskan alamat lengkap Anda..."></textarea>
+        </p>
+
+        <!-- Input Checkbox (Bisa pilih lebih dari satu atau konfirmasi) -->
+        <p>
+            <input type="checkbox" id="syarat" name="syarat" required>
+            <label for="syarat">Saya menyetujui syarat dan ketentuan yang berlaku.</label>
+        </p>
+
+        <!-- Tombol Submit -->
+        <p>
+            <button type="submit">Daftar Sekarang</button>
+            <button type="reset">Hapus Isian</button>
+        </p>
+
+    </form>
+
+</body>
+</html>

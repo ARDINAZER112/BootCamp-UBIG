@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode 17: Latihan Menampilkan Video</title>
+</head>
+<body>
+
+    <h1>Belajar Memasukkan Video di HTML</h1>
+
+    <p>Di bawah ini adalah contoh pemutar video dasar yang dilengkapi dengan tombol kontrol (play, pause, volume, dll):</p>
+    
+    <!-- Tag video dengan pengaturan lebar 600px dan menampilkan kontrol pemutar -->
+    <video width="600" controls>
+        <!-- Mengambil file video dari folder 'video'. Disarankan menyediakan format mp4 -->
+        <source src="video/video1.mp4" type="video/mp4">
+        <!-- Anda bisa menambahkan format alternatif seperti webm sebagai cadangan -->
+        <source src="video/video2.webm" type="video/webm">
+        
+        <!-- Teks ini hanya akan muncul jika browser pengguna sangat jadul dan tidak mendukung tag video HTML5 -->
+        Maaf, browser Anda tidak mendukung pemutaran video HTML5.
+    </video>
+
+    <hr>
+
+    <h2>Video dengan Autoplay, Muted, Loop, dan Poster</h2>
+    
+    <p>Di bawah ini menggunakan video yang berputar otomatis tanpa suara, berulang terus-menerus, dan memiliki gambar <i>thumbnail</i> (poster) sebelum video dimuat:</p>
+
+    <video width="600" autoplay muted loop poster="img/thumbnail.jpg">
+        <source src="video/background.mp4" type="video/mp4">
+        Maaf, browser Anda tidak mendukung pemutaran video HTML5.
+    </video>
+
+</body>
+</html>
