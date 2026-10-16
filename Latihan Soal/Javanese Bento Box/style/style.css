@@ -12,6 +12,7 @@
 body {
     padding: var(--padding-fluid);
     font-family: sans-serif;
+    background-color: #f4f4f4;
 }
 
 .bento-container {
@@ -26,10 +27,13 @@ body {
     background-color: white;
     border: 2px solid #333;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .sekat-nasi {
@@ -43,5 +47,62 @@ body {
 }
 
 .sekat-buah, .sekat-bumbu {
-    min-height: clamp(180px, 22vw, 280px)
+    min-height: clamp(180px, 22vw, 280px);
+}
+
+
+@media (max-width: 1024px) {
+    .bento-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sekat-nasi {
+        grid-column: span 2; 
+    }
+    
+    .sekat-buah, .sekat-bumbu {
+        grid-column: span 1;
+    }
+
+    .sekat-iwak {
+        grid-row: auto;
+        grid-column: span 2;
+        min-height: clamp(200px, 25vw, 320px);
+    }
+}
+
+@media (max-width: 767px) {
+    .bento-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sekat-nasi, .sekat-iwak, .sekat-buah, .sekat-bumbu {
+        grid-column: span 1;
+        grid-row: auto;
+        min-height: 150px;
+    }
+}
+
+
+.bento-container.mode-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.bento-container.mode-flex .bento-item {
+    flex-grow: 1;
+}
+
+.bento-container.mode-flex .sekat-nasi {
+    flex-basis: calc(66.66% - var(--gap-fluid)); 
+}
+
+.bento-container.mode-flex .sekat-iwak {
+    flex-basis: calc(33.33% - var(--gap-fluid));
+}
+
+.bento-container.mode-flex .sekat-buah, 
+.bento-container.mode-flex .sekat-bumbu {
+    flex-basis: calc(33.33% - var(--gap-fluid));
 }
