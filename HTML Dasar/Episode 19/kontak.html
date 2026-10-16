@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode 19: Latihan 3</title>
+</head>
+<body>
+
+    <h1><img src="img/logo_perpus.jpg" alt="Logo_Vidya_Mandira_SMK_TJP" height="100px" align="center">Perpustakaan Vidya Mandira SMKS TJP</h1>
+    <hr>
+    
+    <h4>Halaman Web:</h4>
+    <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="buku.html">Daftar Buku</a></li>
+        <li><a href="kontak.html">Hubungi Kami</a></li>
+    </ul>
+    <hr>
+
+    <h2>Kontak</h2>
+    <p>Punya pertanyaan atau ingin mengusulkan buku baru? Silakan isi form di bawah ini:</p>
+    
+    <form action="#" method="POST">
+        <label for="nama">Nama Lengkap:</label><br>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda"><br><br>
+        
+        <label for="email">Alamat Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="contoh@email.com"><br><br>
+        
+        <label for="kategori">Kategori Pesan:</label><br>
+        <select id="kategori" name="kategori">
+            <option value="pertanyaan">Pertanyaan Umum</option>
+            <option value="usulan">Usulan Buku Baru</option>
+            <option value="keluhan">Keluhan Layanan</option>
+        </select><br><br>
+        
+        <label for="pesan">Isi Pesan:</label><br>
+        <textarea id="pesan" name="pesan" rows="5" cols="40" placeholder="Tulis pesan Anda di sini..."></textarea><br><br>
+        
+        <input type="submit" value="Kirim Pesan">
+    </form>
+
+</body>
+</html>
