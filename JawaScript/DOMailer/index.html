@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOMailer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>DOMailer</h1>
+      <div class="counters">
+        Unread: <strong id="unread-count">0</strong> |
+        Starred: <strong id="starred-count">0</strong>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <input type="text" id="search-input" placeholder="Search by sender or subject...">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="unread">Unread</button>
+        <button class="filter-btn" data-filter="starred">Starred</button>
+        <button id="open-compose" class="compose-btn">+ Compose</button>
+      </div>
+    </section>
+
+    <div id="bulk-bar" class="bulk-bar" hidden>
+      <span><strong id="selected-count">0</strong> item(s) selected</span>
+      <button id="bulk-read" class="btn btn-primary">Mark as Read</button>
+      <button id="bulk-delete" class="btn btn-danger">Delete Selected</button>
+    </div>
+
+    <table class="email-table">
+      <thead>
+        <tr>
+          <th class="col-check"><input type="checkbox" id="select-all" aria-label="Select all"></th>
+          <th class="col-star">&#9733;</th>
+          <th class="col-sender">Sender</th>
+          <th>Subject &amp; Content</th>
+          <th class="col-date">Date</th>
+          <th class="col-action">Action</th>
+        </tr>
+      </thead>
+      <tbody id="email-list"></tbody>
+    </table>
+  </main>
+
+  <!-- Compose modal -->
+  <div id="compose-modal" class="modal" hidden>
+    <form id="compose-form" class="modal-box">
+      <h2>Compose Email</h2>
+      <label>Sender
+        <input type="text" id="compose-sender" value="Me" required>
+      </label>
+      <label>Subject
+        <input type="text" id="compose-subject" placeholder="Subject (try URGENT / IMPORTANT)" required>
+      </label>
+      <label>Message
+        <textarea id="compose-body" rows="4" placeholder="Write your message..." required></textarea>
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="cancel-compose" class="btn btn-light">Cancel</button>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
