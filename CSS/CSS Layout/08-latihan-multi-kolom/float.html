@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Multi Kolom</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .row::after { content:""; display:block; clear:both; }  /* clearfix */
+    .kiri{float:left;width:20%} .tengah{float:left;width:60%} .kanan{float:left;width:20%}
+  </style>
+</head>
+<body>
+  <header>Header</header>
+  <div class="row">
+    <aside class="kiri">Kiri 20%</aside>
+    <main class="tengah">Tengah 60%</main>
+    <aside class="kanan">Kanan 20%</aside>
+  </div>
+  <footer>Footer</footer>
+</body>
+</html>

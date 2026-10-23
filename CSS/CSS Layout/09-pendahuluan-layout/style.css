@@ -1,0 +1,6 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+.demo { padding: 16px; background: #bee3f8; border: 1px solid #3182ce; margin-bottom: 20px; }
+.fixed  { width: 600px; }
+.liquid { width: 80%; }
+.resp   { width: 100%; max-width: 600px; }

@@ -1,0 +1,4 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+img { max-width: 100%; height: auto; display: block; }
+h1 { font-size: clamp(24px, 6vw, 48px); }   /* ukuran teks fleksibel */

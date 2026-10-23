@@ -1,0 +1,4 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+.box { width: 200px; padding: 12px; margin-bottom: 8px; background: #e9d8fd; border: 1px solid #805ad5; }
+.geser { position: relative; top: 15px; left: 60px; background: #fbb6ce; }

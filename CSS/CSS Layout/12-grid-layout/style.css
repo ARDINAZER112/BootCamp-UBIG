@@ -1,0 +1,17 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+.grid { display: grid; gap: 10px; margin-bottom: 20px; }
+.grid > div, .halaman > * { padding: 18px; background: #bee3f8; border: 1px solid #3182ce; text-align: center; }
+.dasar { grid-template-columns: repeat(3, 1fr); }
+.lebar { grid-column: span 2; background: #fbd38d !important; }
+.halaman { display: grid; gap: 10px;
+  grid-template-columns: 180px 1fr 160px;
+  grid-template-areas:
+    "head head head"
+    "nav  main side"
+    "foot foot foot"; }
+.halaman header { grid-area: head; }
+.halaman nav    { grid-area: nav; }
+.halaman main   { grid-area: main; min-height: 120px; }
+.halaman aside  { grid-area: side; }
+.halaman footer { grid-area: foot; }
