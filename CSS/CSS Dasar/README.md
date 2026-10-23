@@ -1,7 +1,5 @@
-# Belajar CSS - Contoh Kode
+# Belajar CSS
 
-Disusun dari daftar episode "Belajar Web Dasar [CSS]" (28 episode) di folder Google Drive.
-Setiap folder berisi: `index.html`, `style.css` (jika eksternal), dan `catatan.md` (penjelasan).
 
 ## Daftar materi
 | Ep | Materi | Folder |
