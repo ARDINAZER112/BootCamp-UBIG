@@ -3,9 +3,6 @@
 Disusun dari daftar episode "Belajar Web Dasar [CSS]" (28 episode) di folder Google Drive.
 Setiap folder berisi: `index.html`, `style.css` (jika eksternal), dan `catatan.md` (penjelasan).
 
-## Cara pakai
-Buka `index.html` di folder utama untuk menu semua contoh, atau buka langsung folder episode.
-
 ## Daftar materi
 | Ep | Materi | Folder |
 |----|--------|--------|
@@ -36,11 +33,3 @@ Buka `index.html` di folder utama untuk menu semua contoh, atau buka langsung fo
 | 25 | Forms Style | `25-forms-style/` |
 | 25.5 | Images Style | `25_5-images-style/` |
 | 26-28 | Studi Kasus Final (Part 1–3: Website Portofolio) | `26-28-studi-kasus-final/` |
-
-## Urutan belajar yang disarankan
-1. **Dasar (01-04):** apa itu CSS, 3 cara menulis CSS
-2. **Inti (05-08):** selector, cascade, specificity, inheritance
-3. **Visual (09-13):** warna, alpha, font, teks, link states
-4. **Layout (14-20):** box model, border, padding, margin, display
-5. **Komponen (23-25.5):** list, tabel, form, gambar
-6. **Proyek (21-22, 26-28):** studi kasus dan portofolio final
