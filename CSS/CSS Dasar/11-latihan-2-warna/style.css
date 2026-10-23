@@ -1,0 +1,6 @@
+/* Bonus: CSS variable agar warna mudah diganti */
+:root { --primary: #2b6cb0; --secondary: #ed8936; --overlay: rgba(43,108,176,.4); }
+body { font-family: sans-serif; margin: 0; }
+.banner { background: var(--primary); color: white; padding: 40px; text-align: center; }
+.palet { display: flex; }
+.sw { flex: 1; padding: 40px 10px; color: white; text-align: center; font-weight: bold; }

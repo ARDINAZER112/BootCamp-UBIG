@@ -1,0 +1,4 @@
+body { font-family: Georgia, serif; }
+.induk { color: darkslateblue; font-size: 18px; border: 2px dashed orange; padding: 10px; }
+.mandiri { color: darkgreen; }
+.paksa { border: inherit; }   /* border biasanya tidak diwariskan */

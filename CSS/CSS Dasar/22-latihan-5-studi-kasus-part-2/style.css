@@ -1,0 +1,9 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; }
+.hero { text-align: center; padding: 80px 20px; color: white; background: linear-gradient(135deg, #2b6cb0, #805ad5); }
+.hero h1 { font-size: 42px; margin-bottom: 10px; }
+.hero p { margin-bottom: 24px; }
+.cta { display: inline-block; padding: 12px 28px; background: white; color: #2b6cb0; border-radius: 30px; text-decoration: none; font-weight: bold; }
+.fitur { display: flex; gap: 20px; padding: 40px 30px; flex-wrap: wrap; }
+.kartu { flex: 1 1 220px; padding: 24px; border-radius: 10px; background: white; box-shadow: 0 4px 14px rgba(0,0,0,.1); transition: transform .2s; }
+.kartu:hover { transform: translateY(-6px); }

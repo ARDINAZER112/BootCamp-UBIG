@@ -1,0 +1,8 @@
+body { padding: 20px; }
+.serif { font-family: Georgia, serif; }
+.mono { font-family: "Courier New", monospace; }
+.besar { font-size: 2rem; }
+.tebal { font-weight: 800; }
+.miring { font-style: italic; }
+.garis { text-decoration: underline wavy crimson; }
+.tanpa-garis { text-decoration: none; }

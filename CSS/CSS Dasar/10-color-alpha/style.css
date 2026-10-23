@@ -1,0 +1,4 @@
+body { font-family: sans-serif; }
+.latar { background: linear-gradient(90deg, #f56565, #4299e1); padding: 30px; }
+.a { background-color: rgba(0, 0, 0, 0.5); color: white; padding: 20px; margin-bottom: 12px; }
+.b { background-color: black; color: white; padding: 20px; opacity: 0.5; }

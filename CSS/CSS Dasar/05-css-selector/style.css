@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 30px; }
+#judul { color: crimson; }                 /* ID */
+h1 + p { font-weight: bold; }              /* adjacent sibling */
+.kartu { border: 1px solid #ccc; padding: 10px; }  /* class */
+.kartu > p { color: #555; }                /* child */
+.penting { background: gold; }
+li:nth-child(even) { background: #eee; }   /* pseudo-class */
+li:first-child { font-weight: bold; }
+a[target="_blank"]::after { content: " ↗"; } /* atribut + pseudo-element */
+a:hover { color: red; }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aturan Cascade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2># Episode 07 - Aturan Cascade</h2>
+
+  <p>Jika beberapa rule mengenai elemen yang sama, browser memilih pemenang berdasarkan:</p>
+<p>
+  <ol>
+    <li><b>Importance</b> — <code>!important</code> menang (hindari dipakai sembarangan)</li>
+    <li><b>Specificity</b> — inline (1000) > ID (100) > class/atribut/pseudo-class (10) > elemen (1)</li>
+    <li><b>Urutan</b> — jika setara, rule yang </b>paling akhir</b> menang.</li>
+  </ol>
+</p>
+<p>Teks akhirnya berwarna hijau karena specificity ID.</p>
+
+  <p id="p1" class="biru">This a Blue color</p>
+  <p class="biru merah">This a Red Color, because two class and red color win</p>
+</body>
+</html>
