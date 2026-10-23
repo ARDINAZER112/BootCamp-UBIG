@@ -1,7 +1,4 @@
-# Belajar CSS Layout - Contoh Kode
-
-Disusun dari 16 episode "CSS Layout" di folder Google Drive (+ 1 bonus Flexbox).
-Tiap folder: `index.html`, `style.css`, `catatan.md`.
+# Belajar CSS Layout
 
 | Ep | Materi | Folder |
 |----|--------|--------|
@@ -22,10 +19,3 @@ Tiap folder: `index.html`, `style.css`, `catatan.md`.
 | 15 | Responsive Layout - Media Queries | `15-responsive-media-queries/` |
 | 16 | Latihan Mobile Responsive Layout | `16-latihan-mobile-responsive/` |
 | Bonus | Flexbox | `bonus-flexbox/` |
-
-## Alur belajar
-1. **Position (01-06):** static, relative, absolute, fixed, sticky, z-index
-2. **Float & multi kolom (07-08):** cara lama, tetap perlu dipahami
-3. **Jenis layout (09-11):** fixed, liquid
-4. **Layout modern (12 + bonus):** Grid dan Flexbox
-5. **Responsif (13-16):** viewport, grid view, media query, latihan mobile
