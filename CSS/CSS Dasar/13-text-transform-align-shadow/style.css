@@ -1,0 +1,7 @@
+body { font-family: sans-serif; padding: 20px; }
+.judul { text-transform: capitalize; text-align: center; letter-spacing: 3px; color: #2b6cb0; text-shadow: 2px 2px 4px rgba(0,0,0,.3); }
+.rata { text-align: justify; line-height: 1.7; width: 400px; }
+a:link    { color: royalblue; }
+a:visited { color: purple; }
+a:hover   { color: orangered; text-decoration: underline; }
+a:active  { color: red; }

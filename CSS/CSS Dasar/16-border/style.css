@@ -1,0 +1,8 @@
+body { font-family: sans-serif; padding: 20px; }
+.b { padding: 12px; margin-bottom: 12px; }
+.solid  { border: 3px solid #2b6cb0; }
+.dashed { border: 3px dashed #dd6b20; }
+.dotted { border: 3px dotted #38a169; }
+.sisi   { border-top: 4px solid red; border-bottom: 4px double blue; }
+.bulat  { border: 2px solid #805ad5; border-radius: 16px; }
+.lingkaran { width: 80px; height: 80px; border: 3px solid teal; border-radius: 50%; display: grid; place-items: center; }

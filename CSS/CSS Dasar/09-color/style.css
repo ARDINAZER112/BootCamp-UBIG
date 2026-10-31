@@ -1,0 +1,6 @@
+body { font-family: sans-serif; padding: 20px; }
+.k { padding: 14px; margin-bottom: 8px; color: white; font-weight: bold; }
+.nama { background-color: tomato; }
+.hex  { background-color: #3182ce; }
+.rgb  { background-color: rgb(72, 187, 120); }
+.hsl  { background-color: hsl(270, 60%, 60%); }

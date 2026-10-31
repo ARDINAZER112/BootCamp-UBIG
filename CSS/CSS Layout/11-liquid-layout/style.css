@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+body { background: #edf2f7; }
+.halaman { width: 90%; max-width: 1200px; min-width: 320px; margin: 0 auto; background: white; }
+header, footer { padding: 20px; background: #2d3748; color: white; text-align: center; }
+.isi { display: flex; }
+aside { width: 25%; padding: 20px; background: #e2e8f0; min-height: 240px; }
+main  { width: 75%; padding: 20px; }

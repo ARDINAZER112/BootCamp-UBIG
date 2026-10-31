@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOMailer - TechCorp</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header & Live Counters -->
+        <header class="header">
+            <h1>DOMailer</h1>
+            <div class="counters">
+                Unread: <strong id="count-unread">0</strong> | 
+                Starred: <strong id="count-starred">0</strong>
+            </div>
+        </header>
+
+        <!-- Search & Filter Toolbar -->
+        <div class="toolbar">
+            <input type="text" id="search-input" placeholder="Search by sender or subject...">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="unread">Unread</button>
+                <button class="filter-btn" data-filter="starred">Starred</button>
+                <button id="btn-toggle-compose" class="compose-btn">+ Compose</button>
+            </div>
+        </div>
+
+        <!-- Compose Form (Hidden by default) -->
+        <form id="compose-form" class="hidden">
+            <h3>Compose New Email</h3>
+            <input type="text" id="compose-sender" placeholder="Sender Name" required>
+            <input type="text" id="compose-subject" placeholder="Subject" required>
+            <textarea id="compose-body" placeholder="Email body..." required></textarea>
+            <button type="submit" class="send-btn">Send Email</button>
+        </form>
+
+        <!-- Bulk Action Panel -->
+        <div id="bulk-action-panel" class="bulk-panel hidden">
+            <span id="selected-count">0 item(s) selected</span>
+            <button id="btn-bulk-read">Mark as Read</button>
+            <button id="btn-bulk-delete" class="danger">Delete Selected</button>
+        </div>
+
+        <!-- Email List Container -->
+        <table class="email-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="master-checkbox"></th>
+                    <th>★</th>
+                    <th>Sender</th>
+                    <th>Subject & Content</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="email-list">
+                <!-- Elemen row email akan di-render di sini oleh JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="script/app.js"></script>
+</body>
+</html>

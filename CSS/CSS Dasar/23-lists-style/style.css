@@ -1,0 +1,8 @@
+body { font-family: sans-serif; padding: 20px; }
+.kotak { list-style-type: square; }
+.kotak li::marker { color: crimson; }
+.romawi { list-style-type: upper-roman; }
+.tanpa { list-style: none; padding: 0; }
+.tanpa li { padding: 8px; border-bottom: 1px solid #ddd; }
+.emoji { list-style: none; padding-left: 0; }
+.emoji li::before { content: "✅ "; }

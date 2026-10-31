@@ -1,0 +1,7 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+header, footer { padding: 16px; background: #2d3748; color: white; text-align: center; }
+.kiri, .tengah, .kanan { padding: 16px; min-height: 200px; }
+.kiri { background: #bee3f8; } .tengah { background: #fefcbf; } .kanan { background: #c6f6d5; }
+
+/* Versi lain di file masing-masing (float.html / flex.html pakai <style> tambahan) */

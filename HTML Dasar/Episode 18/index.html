@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode 18: Latihan Menampilkan Audio dan Iframe</title>
+</head>
+<body>
+
+    <h1>Belajar Memasukkan Audio di HTML</h1>
+
+    <p>Di bawah ini adalah pemutar audio dasar dengan tombol kontrol (play, pause, volume):</p>
+    
+    <!-- Tag audio untuk memutar suara/musik -->
+    <audio controls>
+        <!-- Disarankan menggunakan format mp3 karena didukung oleh semua browser -->
+        <source src="audio/audio1.mp3" type="audio/mpeg">
+        <source src="audio/audio2.ogg" type="audio/ogg">
+        Maaf, browser Anda tidak mendukung elemen audio HTML5.
+    </audio>
+
+    <hr>
+
+    <h2>Menggunakan Iframe (Embed Video YouTube)</h2>
+    
+    <p>Iframe YouTube.</p>
+
+    <!-- Iframe untuk menampilkan halaman web lain atau video YouTube -->
+    <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+
+</body>
+</html>

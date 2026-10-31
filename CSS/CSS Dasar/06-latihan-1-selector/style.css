@@ -1,0 +1,6 @@
+body { font-family: sans-serif; background: #edf2f7; padding: 30px; }
+.kartu { background: white; width: 260px; padding: 20px; margin-bottom: 16px; border-radius: 8px; }
+#nama { color: #2b6cb0; }
+.role { color: #718096; }
+.tombol { display: inline-block; background: #2b6cb0; color: white; padding: 8px 14px; text-decoration: none; border-radius: 4px; }
+.tombol:hover { background: #2c5282; }

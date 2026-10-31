@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Selector</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2># Episode 05 - CSS Selector</h2>
+
+  <p>Selector menentukan <b>elemen mana</b> yang di-style.</p>
+  <p>
+    <ul>
+      <li>- Elemen: <code>p {}</code> · Class: <code>.kartu {}</code> · ID: <code>#judul {}</code> (ID unik, class boleh banyak)</li>
+      <li>- Universal: <code>* {}</code> · Grup: <code>h1, h2 {}</code></li>
+      <li>- Descendant: <code>div p {}</code> · Child: <code>div > p {}</code> · Adjacent: <code>h1 + p {}</code> · Sibling: <code>h1 ~ p {}</code></li>
+      <li>- Atribut: <code>a[target="_blank"] {}</code> · Pseudo-class: <code>a:hover</code>, <code>li:first-child</code>, <code>li:nth-child(2n)</code> · Pseudo-element: <code>p::first-line</code>, <code>::before</code></li>
+  </ul>
+</p>
+
+  <h1 id="judul">Selector</h1>
+  <p>Paragraf tepat setelah h1 (adjacent).</p>
+  <div class="kartu">
+    <p>Paragraf di dalam kartu (child).</p>
+    <p class="penting">Paragraf penting.</p>
+  </div>
+  <ul>
+    <li>Satu</li><li>Dua</li><li>Tiga</li><li>Empat</li>
+  </ul>
+  <a href="https:luxinesid.my.id" target="_blank">My Portofolio</a>
+</body>
+</html>

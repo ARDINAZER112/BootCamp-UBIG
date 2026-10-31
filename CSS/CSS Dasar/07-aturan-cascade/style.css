@@ -1,0 +1,4 @@
+p { color: black; }          /* specificity 1   */
+.biru { color: blue; }       /* specificity 10  */
+.merah { color: red; }       /* 10, tapi lebih akhir -> menang atas .biru */
+#p1 { color: green; }        /* 100 -> menang */

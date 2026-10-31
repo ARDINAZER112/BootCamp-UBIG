@@ -1,0 +1,7 @@
+body { font-family: sans-serif; padding: 20px; }
+.blk { background: #bee3f8; margin-bottom: 6px; padding: 8px; }
+.inl { background: #fed7d7; width: 200px; padding: 8px; }        /* width diabaikan */
+.ib  { display: inline-block; background: #c6f6d5; width: 120px; padding: 8px; }
+.hilang { display: none; }
+.flex { display: flex; gap: 10px; }
+.flex > div { flex: 1; background: #fefcbf; padding: 20px; text-align: center; }

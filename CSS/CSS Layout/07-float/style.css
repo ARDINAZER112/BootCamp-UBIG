@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 0; padding: 20px; }
+.wrap { border: 2px dashed #a0aec0; padding: 10px; display: flow-root; }  /* flow-root = clearfix modern */
+.kiri { float: left; width: 120px; margin: 0 14px 8px 0; border-radius: 8px; }
+.kolom { width: 48%; padding: 16px; color: white; margin-top: 16px; }
+.k1 { float: left; background: #3182ce; }
+.k2 { float: right; background: #dd6b20; }
+.bersih { clear: both; padding-top: 16px; }
