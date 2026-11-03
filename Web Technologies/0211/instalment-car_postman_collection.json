@@ -1,0 +1,1128 @@
+{
+    "info": {
+        "_postman_id": "car-instalment-api-collection",
+        "name": "Installment Cars",
+        "description": "Postman Collection resmi untuk pengujian modul REST API Car Instalment Platform (Phase 1).",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "A1a - Login success",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Response has required fields', function () {",
+                                    "    pm.expect(jsonData).to.have.property('name');",
+                                    "    pm.expect(jsonData).to.have.property('born_date');",
+                                    "    pm.expect(jsonData).to.have.property('gender');",
+                                    "    pm.expect(jsonData).to.have.property('address');",
+                                    "    pm.expect(jsonData).to.have.property('token');",
+                                    "    pm.expect(jsonData).to.have.property('regional');",
+                                    "    pm.expect(jsonData.regional).to.have.property('id');",
+                                    "    pm.expect(jsonData.regional).to.have.property('province');",
+                                    "    pm.expect(jsonData.regional).to.have.property('district');",
+                                    "});",
+                                    "if (jsonData.token) {",
+                                    "    pm.collectionVariables.set('token', jsonData.token);",
+                                    "    pm.environment.set('token', jsonData.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id_card_number\": \"20210001\",\n    \"password\": \"121212\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A1b - Login failed",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is ID Card Number or Password incorrect', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('ID Card Number or Password incorrect');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id_card_number\": \"00000000\",\n    \"password\": \"wrongpassword\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A1c - Logout success",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Message is Logout success', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Logout success');",
+                                    "});",
+                                    "// Login kembali secara otomatis agar variabel token tetap terisi untuk request berikutnya",
+                                    "var baseUrl = pm.collectionVariables.get('base_url') || 'http://127.0.0.1:8000';",
+                                    "pm.sendRequest({",
+                                    "    url: baseUrl + '/api/v1/auth/login',",
+                                    "    method: 'POST',",
+                                    "    header: {'Content-Type': 'application/json', 'Accept': 'application/json'},",
+                                    "    body: {",
+                                    "        mode: 'raw',",
+                                    "        raw: JSON.stringify({ id_card_number: '20210001', password: '121212' })",
+                                    "    }",
+                                    "}, function (err, res) {",
+                                    "    if (!err && res.code === 200) {",
+                                    "        var data = res.json();",
+                                    "        pm.collectionVariables.set('token', data.token);",
+                                    "        pm.environment.set('token', data.token);",
+                                    "    }",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "logout"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A1d - Logout failed",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Invalid token', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Invalid token');",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/auth/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "logout"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Request Data Validation",
+            "item": [
+                {
+                    "name": "A2a - Request validation success",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var baseUrl = pm.collectionVariables.get('base_url') || 'http://127.0.0.1:8000';",
+                                    "if (!pm.collectionVariables.get('token') && !pm.environment.get('token')) {",
+                                    "    pm.sendRequest({",
+                                    "        url: baseUrl + '/api/v1/auth/login',",
+                                    "        method: 'POST',",
+                                    "        header: {'Content-Type': 'application/json', 'Accept': 'application/json'},",
+                                    "        body: {",
+                                    "            mode: 'raw',",
+                                    "            raw: JSON.stringify({ id_card_number: '20210001', password: '121212' })",
+                                    "        }",
+                                    "    }, function (err, res) {",
+                                    "        if (!err && res.code === 200) {",
+                                    "            var data = res.json();",
+                                    "            pm.collectionVariables.set('token', data.token);",
+                                    "            pm.environment.set('token', data.token);",
+                                    "        }",
+                                    "    });",
+                                    "}"
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Message is Request data validation sent successful', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Request data validation sent successful');",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"job\": \"Programmer\",\n    \"job_description\": \"Software developer web\",\n    \"income\": \"5000000\",\n    \"reason_accepted\": \"Butuh mobil untuk operasional harian\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/validation",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "validation"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A2b - Request validation invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"job\": \"Programmer\",\n    \"job_description\": \"Software developer web\",\n    \"income\": \"5000000\",\n    \"reason_accepted\": \"Butuh mobil\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/validation",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "validation"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Get the Validation",
+            "item": [
+                {
+                    "name": "A2c - Get validation success",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Response has validation object', function () {",
+                                    "    pm.expect(jsonData).to.have.property('validation');",
+                                    "    pm.expect(jsonData.validation).to.have.property('id');",
+                                    "    pm.expect(jsonData.validation).to.have.property('status');",
+                                    "    pm.expect(jsonData.validation).to.have.property('job');",
+                                    "    pm.expect(jsonData.validation).to.have.property('job_description');",
+                                    "    pm.expect(jsonData.validation).to.have.property('income');",
+                                    "    pm.expect(jsonData.validation).to.have.property('reason_accepted');",
+                                    "    pm.expect(jsonData.validation).to.have.property('validator_notes');",
+                                    "    pm.expect(jsonData.validation).to.have.property('validator');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/validations",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "validations"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A2d - Get validation invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/validations",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "validations"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Installment",
+            "item": [
+                {
+                    "name": "A3a - Get all Installment cars",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Response has cars array', function () {",
+                                    "    pm.expect(jsonData).to.have.property('cars');",
+                                    "    pm.expect(Array.isArray(jsonData.cars)).to.be.true;",
+                                    "    if (jsonData.cars.length > 0) {",
+                                    "        var car = jsonData.cars[0];",
+                                    "        pm.expect(car).to.have.property('id');",
+                                    "        pm.expect(car).to.have.property('car');",
+                                    "        pm.expect(car).to.have.property('brand');",
+                                    "        pm.expect(car).to.have.property('price');",
+                                    "        pm.expect(car).to.have.property('description');",
+                                    "        pm.expect(car).to.have.property('available_month');",
+                                    "    }",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/instalment_cars",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "instalment_cars"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A3b - Get all Installment cars invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/instalment_cars",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "instalment_cars"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Installment Detail",
+            "item": [
+                {
+                    "name": "A3c - Get detail installment cars",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Response has instalment object', function () {",
+                                    "    pm.expect(jsonData).to.have.property('instalment');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('id');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('car');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('brand');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('price');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('description');",
+                                    "    pm.expect(jsonData.instalment).to.have.property('available_month');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/instalment_cars/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "instalment_cars",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A3d - Get detail Installment cars invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/instalment_cars/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "instalment_cars",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Applying for installment",
+            "item": [
+                {
+                    "name": "A4a - Applying for installment success",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var baseUrl = pm.collectionVariables.get('base_url') || 'http://127.0.0.1:8000';",
+                                    "var token = pm.collectionVariables.get('token') || pm.environment.get('token');",
+                                    "// 1. Reset riwayat apply agar request A4a selalu sukses dipanggil berkali-kali",
+                                    "pm.sendRequest({",
+                                    "    url: baseUrl + '/api/v1/validator/reset',",
+                                    "    method: 'POST',",
+                                    "    header: {'Authorization': 'Bearer ' + token, 'Accept': 'application/json'},",
+                                    "    body: {mode: 'raw', raw: JSON.stringify({society_id: 1})}",
+                                    "}, function () {",
+                                    "    // 2. Setujui status validasi society 1",
+                                    "    pm.sendRequest({",
+                                    "        url: baseUrl + '/api/v1/validator/approve',",
+                                    "        method: 'POST',",
+                                    "        header: {'Authorization': 'Bearer ' + token, 'Accept': 'application/json'},",
+                                    "        body: {mode: 'raw', raw: JSON.stringify({society_id: 1})}",
+                                    "    });",
+                                    "});"
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Message is Applying for Instalment successful', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Applying for Instalment successful');",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"instalment_id\": 1,\n    \"months\": 12,\n    \"notes\": \"I want this cars\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A4b - Applying for installment invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"instalment_id\": 1,\n    \"months\": 12,\n    \"notes\": \"I want this cars\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A4c - If the society validation hasn't accepted by validator",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var baseUrl = pm.collectionVariables.get('base_url') || 'http://127.0.0.1:8000';",
+                                    "pm.sendRequest({",
+                                    "    url: baseUrl + '/api/v1/auth/login',",
+                                    "    method: 'POST',",
+                                    "    header: {'Content-Type': 'application/json', 'Accept': 'application/json'},",
+                                    "    body: {",
+                                    "        mode: 'raw',",
+                                    "        raw: JSON.stringify({ id_card_number: '20210002', password: '121212' })",
+                                    "    }",
+                                    "}, function (err, res) {",
+                                    "    if (!err && res.code === 200) {",
+                                    "        pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + res.json().token });",
+                                    "    }",
+                                    "});"
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is correct', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Your data validator must be accepted by validator before');",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"instalment_id\": 1,\n    \"months\": 12,\n    \"notes\": \"I want this cars\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A4d - Invalid field",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Invalid field', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Invalid field');",
+                                    "    pm.expect(jsonData).to.have.property('errors');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A4e - If 2nd apply",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Application for a instalment can only be once', function () {",
+                                    "    pm.expect(jsonData.message.trim()).to.eql('Application for a instalment can only be once');",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"instalment_id\": 1,\n    \"months\": 12,\n    \"notes\": \"Coba apply kedua\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Get all installment applications",
+            "item": [
+                {
+                    "name": "A4f - Get all installment applications success",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "pm.test('Response has instalments array', function () {",
+                                    "    pm.expect(jsonData).to.have.property('instalments');",
+                                    "    pm.expect(Array.isArray(jsonData.instalments)).to.be.true;",
+                                    "    if (jsonData.instalments.length > 0) {",
+                                    "        var inst = jsonData.instalments[0];",
+                                    "        pm.expect(inst).to.have.property('id');",
+                                    "        pm.expect(inst).to.have.property('car');",
+                                    "        pm.expect(inst).to.have.property('brand');",
+                                    "        pm.expect(inst).to.have.property('price');",
+                                    "        pm.expect(inst).to.have.property('description');",
+                                    "        pm.expect(inst).to.have.property('applications');",
+                                    "        if (inst.applications.length > 0) {",
+                                    "            var app = inst.applications[0];",
+                                    "            pm.expect(app).to.have.property('month');",
+                                    "            pm.expect(app).to.have.property('nominal');",
+                                    "            pm.expect(app).to.have.property('apply_status');",
+                                    "            pm.expect(app).to.have.property('notes');",
+                                    "        }",
+                                    "    }",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "A4g - Get all installment applications invalid token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "pm.test('Status code is 401', function () {",
+                                    "    pm.response.to.have.status(401);",
+                                    "});",
+                                    "pm.test('Message is Unauthorized user', function () {",
+                                    "    pm.expect(jsonData.message).to.eql('Unauthorized user');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer INVALID_TOKEN_123"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/applications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "applications"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "if (!pm.collectionVariables.get('base_url')) {",
+                    "    pm.collectionVariables.set('base_url', 'http://127.0.0.1:8000');",
+                    "}"
+                ]
+            }
+        }
+    ]
+}

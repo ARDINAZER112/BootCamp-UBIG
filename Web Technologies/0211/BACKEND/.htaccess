@@ -1,0 +1,19 @@
+# REST API dapat diakses di <host>/XX_SERVER_MODULE/BACKEND (tanpa port dan tanpa /public).
+# Semua request diarahkan ke index.php milik Laravel, termasuk file seperti .env
+# sehingga tidak ada file proyek yang bisa diunduh langsung dari browser.
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Teruskan header Authorization (Bearer token) ke PHP
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Jangan rewrite index.php ke dirinya sendiri (mencegah loop)
+    RewriteRule ^index\.php$ - [L]
+
+    RewriteRule ^ index.php [L]
+</IfModule>
