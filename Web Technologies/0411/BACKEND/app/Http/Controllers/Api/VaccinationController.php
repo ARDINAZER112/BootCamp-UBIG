@@ -17,7 +17,6 @@ class VaccinationController extends Controller
     {
         $society = $request->user();
 
-        // A4c - konsultasi harus sudah accepted
         $accepted = Consultation::where('society_id', $society->id)
             ->where('status', 'accepted')
             ->exists();
@@ -26,7 +25,6 @@ class VaccinationController extends Controller
             return $this->fail('Your consultation must be accepted by doctor before');
         }
 
-        // A4d - field tidak valid (soal meminta 401, bukan 422)
         $validator = Validator::make($request->all(), [
             'spot_id' => 'required|integer|exists:spots,id',
             'date'    => 'required|date_format:Y-m-d',
@@ -42,12 +40,10 @@ class VaccinationController extends Controller
         }
 
         return DB::transaction(function () use ($request, $society) {
-            // Kunci baris society supaya dua request bersamaan tidak membuat dosis ganda
             Society::where('id', $society->id)->lockForUpdate()->first();
 
             $existing = Vaccination::where('society_id', $society->id)->orderBy('dose')->get();
 
-            // A4f - sudah 2x vaksin
             if ($existing->count() >= 2) {
                 return $this->fail('Society has been 2x vaccinated');
             }

@@ -11,13 +11,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Endpoint bantu HANYA untuk pengujian lewat Postman collection.
- * Route-nya baru terdaftar kalau ENABLE_TEST_HELPERS=true.
- */
 class TestHelperController extends Controller
 {
-    /** Hapus riwayat apply sebuah society supaya A4a bisa dijalankan berulang. */
     public function reset(Request $request): JsonResponse
     {
         $societyId = (int) $request->input('society_id', $request->user()->id);
@@ -30,7 +25,6 @@ class TestHelperController extends Controller
         return response()->json(['message' => 'Application history reset']);
     }
 
-    /** Set status data validation sebuah society menjadi accepted. */
     public function approve(Request $request): JsonResponse
     {
         $societyId = (int) $request->input('society_id', $request->user()->id);
@@ -38,7 +32,7 @@ class TestHelperController extends Controller
 
         $validation = Validation::firstOrNew(['society_id' => $societyId]);
 
-        if (! $validation->exists) {
+        if (!$validation->exists) {
             $validation->job = 'Programmer';
             $validation->job_description = 'Software developer web';
             $validation->income = 5000000;

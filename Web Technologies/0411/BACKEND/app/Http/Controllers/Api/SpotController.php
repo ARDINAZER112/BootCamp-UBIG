@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class SpotController extends Controller
 {
-    /** Semua spot di region society yang login. */
     public function index(Request $request)
     {
         $vaccines = Vaccine::orderBy('id')->get();
@@ -35,7 +34,6 @@ class SpotController extends Controller
         return response()->json(['spots' => $spots], 200);
     }
 
-    /** Detail spot + jumlah pendaftaran vaksinasi pada tanggal tertentu (default hari ini). */
     public function show(Request $request, $id)
     {
         $request->validate(

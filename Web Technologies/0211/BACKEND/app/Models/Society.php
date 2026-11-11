@@ -34,10 +34,6 @@ class Society extends Authenticatable
         return $this->hasMany(InstallmentApplySociety::class, 'society_id');
     }
 
-    /**
-     * Data seed memakai password plain text ("121212"), tetapi hash bcrypt
-     * juga didukung supaya aman jika password di-hash di kemudian hari.
-     */
     public function passwordMatches(string $plain): bool
     {
         $stored = (string) $this->password;

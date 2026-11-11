@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ValidationController extends Controller
 {
-    /** A2a - Request data validation (hanya boleh sekali per society). */
     public function store(Request $request): JsonResponse
     {
         $society = $request->user();
@@ -45,14 +44,13 @@ class ValidationController extends Controller
         return response()->json(['message' => 'Request data validation sent successful']);
     }
 
-    /** A2c - Ambil data validation milik society yang sedang login. */
     public function show(Request $request): JsonResponse
     {
         $validation = Validation::with('validator')
             ->where('society_id', $request->user()->id)
             ->first();
 
-        if (! $validation) {
+        if (!$validation) {
             return response()->json(['validation' => null]);
         }
 

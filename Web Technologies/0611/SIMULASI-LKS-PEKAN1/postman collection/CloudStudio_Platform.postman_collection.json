@@ -1,0 +1,1281 @@
+{
+  "info": {
+    "_postman_id": "cloudstudio-collection-2026",
+    "name": "CloudStudio Platform - LKS REST API Collection",
+    "description": "Standardized Postman Collection for CloudStudio REST API simulation, following LKS Web Technologies response naming conventions (A1a - B3a).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "A1: Authentication",
+      "item": [
+        {
+          "name": "POST A1a - Register Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Alex Mercer\",\n  \"username\": \"alexm_new\",\n  \"password\": \"SecurePassword123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A1b - Register Validation Failure",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Alex Mercer\",\n  \"username\": \"alexm\",\n  \"password\": \"123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A1c - Login Success (Auditor)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin_auditor\",\n  \"password\": \"AuditorPassword123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A1d - Login Incorrect Credentials",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin_auditor\",\n  \"password\": \"WrongPassword!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A1e - Logout Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A1f - Logout Invalid Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_or_expired_token",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "A2: Data Validation Gate",
+      "item": [
+        {
+          "name": "POST A2a - Request Data Validation Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"github_url\": \"https://github.com/alexmercer\",\n  \"tech_stack\": \"Kubernetes, Go, Rust, Terraform\",\n  \"monthly_income\": 4500.0\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A2b - Request Data Validation Invalid Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_token",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"github_url\": \"https://github.com/alexmercer\",\n  \"tech_stack\": \"Kubernetes, Go\",\n  \"monthly_income\": 4500.0\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A2c - Request Data Validation Invalid Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"github_url\": \"invalid-url\",\n  \"tech_stack\": \"\",\n  \"monthly_income\": \"four thousand\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A2d - Request Data Validation Already Submitted",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"github_url\": \"https://github.com/alexmercer\",\n  \"tech_stack\": \"Kubernetes, Go\",\n  \"monthly_income\": 4500.0\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A2e - Get Validation Success",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/validations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A2f - Get Validation Invalid Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_token",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/validations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A2g - Auditor Review Success",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auditor_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\",\n  \"auditor_notes\": \"All requirements verified and approved.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validations/1/review",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validations",
+                "1",
+                "review"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A2h - Auditor Review Forbidden (Non-Auditor)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/validations/1/review",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "validations",
+                "1",
+                "review"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "A3: Infrastructure Page Builder",
+      "item": [
+        {
+          "name": "POST A3a - Create Page Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Edge Gateway Cluster\",\n  \"slug\": \"edge-gateway-cluster\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A3b - Create Page Duplicate Slug",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Edge Gateway Cluster Duplicate\",\n  \"slug\": \"edge-gateway-cluster\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A3c - Append Section with Auto-Reordering Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template_id\": 3,\n  \"position\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/{{page_slug}}/sections",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "{{page_slug}}",
+                "sections"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A3d - Append Section Page Not Found",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template_id\": 3,\n  \"position\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/non-existent-page-slug/sections",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "non-existent-page-slug",
+                "sections"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A3e - Update Section Fields Success",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    {\n      \"template_field_id\": 12,\n      \"value\": \"10.0.0.0/16 Virtual Private Cloud\"\n    },\n    {\n      \"template_field_id\": 13,\n      \"value\": \"Dual Load Balancer Active-Passive\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/{{page_slug}}/sections/{{section_id}}/fields",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "{{page_slug}}",
+                "sections",
+                "{{section_id}}",
+                "fields"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A3f - Update Section Fields Not Found",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    {\n      \"template_field_id\": 12,\n      \"value\": \"10.0.0.0/16\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/{{page_slug}}/sections/99999/fields",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "{{page_slug}}",
+                "sections",
+                "99999",
+                "fields"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A3g - Publish Infrastructure Page Success",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/pages/{{page_slug}}/publish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "{{page_slug}}",
+                "publish"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT A3h - Publish Infrastructure Page Forbidden (Unverified)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/pages/event-streaming-pipeline/publish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "event-streaming-pipeline",
+                "publish"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A3i - Public Infrastructure Discovery Success",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/public/pages/{{page_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "public",
+                "pages",
+                "{{page_slug}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A3j - Public Infrastructure Discovery Not Found",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/public/pages/unknown-cluster-slug",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "public",
+                "pages",
+                "unknown-cluster-slug"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "A4: Server Cluster Financing & Lease",
+      "item": [
+        {
+          "name": "GET A4a - Get Server Clusters with Filters Success",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/server_clusters?category=gpu_cluster&max_price=5000&sort_by=price&order=desc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "server_clusters"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "gpu_cluster"
+                },
+                {
+                  "key": "max_price",
+                  "value": "5000"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "price"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A4b - Get Server Clusters Invalid Query Parameters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/server_clusters?category=quantum_compute&order=diagonal",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "server_clusters"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "quantum_compute"
+                },
+                {
+                  "key": "order",
+                  "value": "diagonal"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4c - Apply Financing Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 4,\n  \"months\": 12,\n  \"notes\": \"Dedicated training node for local LLM inference.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4d - Apply Financing Invalid Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_token",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 4,\n  \"months\": 12,\n  \"notes\": \"Notes\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4e - Apply Financing Profile Not Accepted",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 4,\n  \"months\": 12\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4f - Apply Financing Invalid Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 9999,\n  \"months\": 5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4g - Apply Financing Income Criteria Failed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 4,\n  \"months\": 6,\n  \"notes\": \"Monthly nominal exceeds total monthly income.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST A4h - Apply Financing Active Lease Exists",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 1,\n  \"months\": 24,\n  \"notes\": \"Concurrent lease attempt.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A4i - Get Developer Lease Applications Success",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET A4j - Get Developer Lease Applications Invalid Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer invalid_token",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Phase Two - Advanced Assessment",
+      "item": [
+        {
+          "name": "POST B1a - Apply Financing Cluster Out of Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 5,\n  \"months\": 12,\n  \"notes\": \"Trying to lease cluster with stock 0.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "PUT B2a - Dynamic Template Validation Format Fails",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    {\n      \"template_field_id\": 12,\n      \"value\": \"invalid-ip-address\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/{{page_slug}}/sections/{{section_id}}/fields",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "{{page_slug}}",
+                "sections",
+                "{{section_id}}",
+                "fields"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST B3a - Apply Financing DSR Exceeded (40% Limit)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{developer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_id\": 4,\n  \"months\": 6,\n  \"notes\": \"Nominal 800 exceeds 40% DSR with existing active leases.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/applications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "applications"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -22,7 +22,6 @@ class Installment extends Model
         return $this->hasMany(AvailableMonth::class, 'installment_id')->orderBy('month');
     }
 
-    /** Bentuk umum satu mobil untuk response API. */
     public function toCarArray(): array
     {
         return [

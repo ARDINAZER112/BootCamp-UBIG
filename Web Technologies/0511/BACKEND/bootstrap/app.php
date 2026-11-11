@@ -1,0 +1,50 @@
+<?php
+
+use App\Http\Middleware\EnsureRole;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'role' => EnsureRole::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwable $e) {
+            return $request->is('api/*') || $request->expectsJson();
+        });
+
+        $exceptions->render(function (AuthenticationException $e, Request $request) {
+            return response()->json([
+                'status'  => 'invalid_token',
+                'message' => 'Invalid or expired token',
+            ], 401);
+        });
+
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            return response()->json([
+                'status'  => 'not_found',
+                'message' => 'Resource not found',
+            ], 404);
+        });
+
+        $exceptions->render(function (ValidationException $e, Request $request) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Invalid field(s) in request',
+                'errors'  => $e->errors(),
+            ], 400);
+        });
+    })->create();

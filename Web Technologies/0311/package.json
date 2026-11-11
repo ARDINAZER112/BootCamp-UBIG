@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "eslint-plugin-oxlint": "^1.93.0",
+    "oxlint": "^1.93.0"
+  }
+}

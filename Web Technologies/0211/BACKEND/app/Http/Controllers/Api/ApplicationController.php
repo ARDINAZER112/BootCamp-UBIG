@@ -14,23 +14,20 @@ use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
-    /** A4a-A4e - Mengajukan instalment (hanya sekali, validation harus accepted). */
     public function store(Request $request): JsonResponse
     {
         $society = $request->user();
 
-        // A4c - data validation harus sudah diterima validator
         $accepted = Validation::where('society_id', $society->id)
             ->where('status', 'accepted')
             ->exists();
 
-        if (! $accepted) {
+        if (!$accepted) {
             return response()->json([
                 'message' => 'Your data validator must be accepted by validator before',
             ], 401);
         }
 
-        // A4d - validasi field
         $validator = Validator::make($request->all(), [
             'instalment_id' => 'required|integer|exists:installment,id',
             'months' => 'required|integer',
@@ -38,12 +35,12 @@ class ApplicationController extends Controller
         ]);
 
         $month = null;
-        if (! $validator->fails()) {
+        if (!$validator->fails()) {
             $month = AvailableMonth::where('installment_id', $request->input('instalment_id'))
                 ->where('month', $request->input('months'))
                 ->first();
 
-            if (! $month) {
+            if (!$month) {
                 $validator->errors()->add('months', 'The selected months is invalid for this instalment.');
             }
         }
@@ -55,7 +52,6 @@ class ApplicationController extends Controller
             ], 401);
         }
 
-        // A4e - hanya boleh mengajukan sekali
         if (InstallmentApplySociety::where('society_id', $society->id)->exists()) {
             return response()->json([
                 'message' => 'Application for a instalment can only be once',
@@ -84,17 +80,16 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Applying for Instalment successful']);
     }
 
-    /** A4f - Semua pengajuan instalment milik society, dikelompokkan per mobil. */
     public function index(Request $request): JsonResponse
     {
         $instalments = InstallmentApplySociety::with(['installment.brand', 'availableMonth', 'status'])
             ->where('society_id', $request->user()->id)
             ->orderBy('id')
             ->get()
-            ->filter(fn ($a) => $a->installment !== null)
+            ->filter(fn($a) => $a->installment !== null)
             ->groupBy('installment_id')
-            ->map(fn ($items) => $items->first()->installment->toCarArray() + [
-                'applications' => $items->map(fn ($a) => [
+            ->map(fn($items) => $items->first()->installment->toCarArray() + [
+                'applications' => $items->map(fn($a) => [
                     'month' => (string) $a->availableMonth?->month,
                     'nominal' => (string) $a->availableMonth?->nominal,
                     'apply_status' => $a->status?->status ?? 'pending',

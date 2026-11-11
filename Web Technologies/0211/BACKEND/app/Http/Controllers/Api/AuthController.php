@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    /** A1a / A1b - Login society menggunakan ID card number + password. */
     public function login(Request $request): JsonResponse
     {
         $idCard = $request->input('id_card_number');
@@ -21,12 +20,12 @@ class AuthController extends Controller
                 ->where('id_card_number', (string) $idCard)
                 ->first();
 
-            if ($society && ! $society->passwordMatches((string) $password)) {
+            if ($society && !$society->passwordMatches((string) $password)) {
                 $society = null;
             }
         }
 
-        if (! $society) {
+        if (!$society) {
             return response()->json(['message' => 'ID Card Number or Password incorrect'], 401);
         }
 
